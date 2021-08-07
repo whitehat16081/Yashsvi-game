@@ -14,6 +14,7 @@ function preload() {
    toffee1Image=loadImage("images/toffee1.png")
    toffee2Image=loadImage("images/toffee2.png")
    toffee3Image=loadImage("images/toffee3.png")
+   introBGImage=loadImage("images/introBG.jpg")
 }
 
 function setup(){
@@ -73,7 +74,21 @@ function draw() {
   if(keyDown("p")){
     girl2.velocityY=-10;
 }
+
 girl2.velocityY=girl2.velocityY+0.8;
+
+for(var i=0;i<toffeeGroup.length;i++){
+    if(toffeeGroup.get(i).isTouching(girl1)){
+        toffeeGroup.get(i).destroy();
+        score1=score1+1;
+   }
+  }
+  for(var i=0;i<toffeeGroup.length;i++){
+    if(toffeeGroup.get(i).isTouching(girl2)){
+        toffeeGroup.get(i).destroy();
+        score2=score2+1;
+   }
+  }
 girl1.collide(invisibleground1);
 girl2.collide(invisibleground2);
 
@@ -85,6 +100,8 @@ girl2.collide(invisibleground2);
         bg.velocityX=0;
         textSize(60);
         fill("white");
+        stroke("black");
+        strokeWeight(5);
         textFont("Comic Sans MS");
         text("Game Over!",500,310);
         
@@ -102,7 +119,7 @@ function spawnObstacles(){
 
     if(frameCount%160===0){
         obstacle=createSprite(1400,400,100,100);
-        obstacle.debug=true;
+        //obstacle.debug=true;
         obstacle.velocityX=-6;
         obstacle.scale=0.2;
         obstacle.y=Math.round(random(400,500));
@@ -124,7 +141,7 @@ function spawnToffee(){
 
     if(frameCount%100===0){
         toffee=createSprite(1400,400,100,100);
-        toffee.debug=true;
+        //toffee.debug=true;
         toffee.velocityX=-6;
         toffee.scale=0.3;
         toffee.y=Math.round(random(400,500));
